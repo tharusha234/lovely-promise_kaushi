@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>❤️ GEN-Z Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            font-family: 'Roboto Slab', serif;
+            background: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background: #fff;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+            position: relative;
+            overflow-y: auto;
+            padding: 20px 15px 40px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+                padding: 30px 25px 50px;
+                margin: 20px auto;
+                border-radius: 30px;
+                min-height: auto;
+                box-shadow: 0 0 60px rgba(255, 0, 0, 0.3);
+            }
+            body { align-items: center; padding: 20px; }
+        }
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+            padding: 10px 0;
+        }
+        .page.active { display: flex; }
+        @media (min-width: 768px) {
+            .page { padding: 20px 0; min-height: 70vh; justify-content: center; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn {
+            background: rgba(255, 51, 102, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 51, 102, 0.6);
+            color: #333;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 900;
+            padding: clamp(12px, 2vh, 18px) clamp(25px, 4vw, 45px);
+            margin: 10px 0;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 0, 50, 0.15);
+            transition: all 0.3s ease;
+            font-family: 'Roboto Slab', serif;
+            letter-spacing: 0.5px;
+            min-width: clamp(150px, 30vw, 220px);
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.1);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 51, 102, 0.25);
+            border-color: #ff3366;
+            box-shadow: 0 12px 35px rgba(255, 0, 50, 0.25);
+        }
+        .btn:active { transform: scale(0.95); }
+        @media (max-width: 480px) {
+            .btn { min-width: 160px; padding: 14px 28px; font-size: 1.05rem; }
+        }
+        .btn-maybe {
+            background: rgba(200, 200, 200, 0.3);
+            border-color: rgba(150, 150, 150, 0.5);
+            box-shadow: 0 8px 25px rgba(100, 100, 100, 0.1);
+        }
+        .btn-maybe:hover {
+            background: rgba(200, 200, 200, 0.4);
+            border-color: #aaa;
+            box-shadow: 0 12px 35px rgba(100, 100, 100, 0.2);
+        }
+        .btn-continue {
+            background: rgba(255, 51, 102, 0.15);
+            border-color: rgba(255, 51, 102, 0.4);
+            font-weight: 900;
+        }
+        .btn-continue:hover {
+            background: rgba(255, 51, 102, 0.25);
+            border-color: #ff3366;
+        }
+        .heart-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .heart-rain i {
+            position: absolute;
+            font-size: clamp(18px, 3vw, 30px);
+            color: #ff3366;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        .video-wrapper {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 0, 50, 0.3);
+            margin: 15px 0;
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        @media (min-width: 768px) {
+            .video-wrapper { max-width: 90%; border-radius: 24px; }
+        }
+        .slideshow-container {
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            margin: 15px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(255, 0, 50, 0.3);
+            background: #000;
+            aspect-ratio: 4/3;
+        }
+        @media (min-width: 768px) {
+            .slideshow-container {
+                max-width: 90%;
+                border-radius: 24px;
+                aspect-ratio: 16/10;
+            }
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+            transform: scale(0.95);
+            object-fit: cover;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide.fade-out {
+            opacity: 0;
+            transform: scale(1.05);
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: clamp(4px, 1vh, 10px) clamp(10px, 2vw, 20px);
+            border-radius: 20px;
+            font-size: clamp(0.7rem, 1.5vw, 1rem);
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            font-weight: 700;
+        }
+        .slide-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: clamp(6px, 1.5vw, 12px);
+            z-index: 10;
+        }
+        .dot {
+            width: clamp(8px, 1.5vw, 14px);
+            height: clamp(8px, 1.5vw, 14px);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: #ff3366;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.6);
+        }
+        .progress-container {
+            width: 100%;
+            max-width: clamp(260px, 70vw, 400px);
+            background: rgba(200, 200, 200, 0.5);
+            border-radius: 30px;
+            height: clamp(20px, 4vh, 30px);
+            margin: 20px 0;
+            overflow: visible;
+            border: 2px solid rgba(255, 51, 102, 0.5);
+            position: relative;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff3366, #ff6699);
+            border-radius: 30px;
+            transition: width 0.05s linear;
+            position: relative;
+        }
+        .draggable-heart {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            cursor: grab;
+            user-select: none;
+            z-index: 20;
+            filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.8));
+            transition: transform 0.2s ease;
+            left: 0%;
+            touch-action: none;
+        }
+        .draggable-heart:active {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        .progress-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 900;
+            color: #ff3366;
+            margin-top: 8px;
+            font-family: 'Satisfy', cursive;
+        }
+        .letter-box {
+            background: rgba(245, 245, 245, 0.95);
+            backdrop-filter: blur(10px);
+            padding: clamp(20px, 4vh, 35px) clamp(15px, 3vw, 30px);
+            border-radius: 20px;
+            border-left: 6px solid #ff3366;
+            border-right: 6px solid #ff3366;
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.1);
+            max-width: 100%;
+            width: 100%;
+            margin: 10px 0;
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            line-height: 1.9;
+        }
+        @media (min-width: 768px) {
+            .letter-box { max-width: 90%; padding: 30px 35px; border-radius: 24px; }
+        }
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #ff3366;
+            white-space: pre-wrap;
+            word-break: break-word;
+            animation: blink-caret 0.75s step-end infinite;
+            font-weight: 400;
+            color: #333;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff3366; }
+        }
+        .big-heart {
+            font-size: clamp(80px, 20vw, 140px);
+            color: #ff3366;
+            text-shadow: 0 0 60px rgba(255, 0, 50, 0.6);
+            animation: pulse 1.5s ease-in-out infinite;
+            margin: 20px 0;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .center-text { text-align: center; width: 100%; }
+        .big-title {
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-weight: 900;
+            color: #ff3366;
+            text-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+            margin: 10px 0;
+        }
+        .sub-text {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #666;
+            margin: 8px 0;
+            font-weight: 400;
+        }
+        .row-buttons {
+            display: flex;
+            gap: clamp(10px, 3vw, 30px);
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .spacer { height: 10px; }
+        .spacer-md { height: clamp(15px, 3vh, 30px); }
+        .spacer-lg { height: clamp(25px, 5vh, 50px); }
+        .bold-text { font-weight: 700; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f0f0; }
+        ::-webkit-scrollbar-thumb { background: #ff3366; border-radius: 10px; }
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 700px;
+                padding: 40px 35px 50px;
+                border-radius: 40px;
+                box-shadow: 0 0 80px rgba(255, 0, 0, 0.15);
+            }
+            .btn { min-width: 200px; padding: 16px 40px; font-size: 1.2rem; }
+            .progress-container { max-width: 450px; height: 28px; }
+        }
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container { padding: 15px 20px 30px; }
+            .page { min-height: 80vh; padding: 5px 0; }
+            .video-wrapper { max-width: 70%; aspect-ratio: 16/9; }
+            .slideshow-container { max-width: 70%; aspect-ratio: 16/9; }
+            .big-heart { font-size: 60px; }
+            .btn { padding: 10px 20px; font-size: 0.9rem; min-width: 120px; }
+        }
+        /* White theme specific overrides */
+        .container { background: #ffffff; color: #333; }
+        .letter-box { background: rgba(250, 250, 250, 0.98); }
+        .sub-text { color: #555; }
+        .btn { color: #333; background: rgba(255, 51, 102, 0.1); }
+        .btn:hover { background: rgba(255, 51, 102, 0.2); }
+        .btn-continue { background: rgba(255, 51, 102, 0.1); }
+        .btn-continue:hover { background: rgba(255, 51, 102, 0.2); }
+        .btn-maybe { background: rgba(200, 200, 200, 0.2); color: #555; }
+        .btn-maybe:hover { background: rgba(200, 200, 200, 0.35); }
+        .typewriter { color: #222; }
+        .progress-container { background: rgba(200, 200, 200, 0.4); }
+        .progress-text { color: #ff3366; }
+    </style>
+</head>
+<body>
+
+    <div class="heart-rain" id="heartRain"></div>
+
+    <div class="container" id="app">
+
+        <!-- PAGE 1 -->
+        <div class="page active" id="page1">
+            <div class="video-wrapper">
+                <video id="proposalVideo" controls muted playsinline>
+                    <source src="video.mp4" type="video/mp4">
+                    ඔබගේ බ්‍රවුසරය video ටැග් එක සපයන්නේ නැත.
+                </video>
+            </div>
+            <div class="center-text">
+                <h2 style="font-family: 'Satisfy', cursive; font-size: clamp(1.5rem, 4vw, 2.5rem); color: #ff3366; margin: 10px 0; font-weight: 700;">
+                    A little moment for us ❤️
+                </h2>
+                <div style="display: flex; justify-content: center; gap: clamp(6px, 1.5vw, 15px); margin: 5px 0;">
+                    <span style="color: #ff3366; font-weight: 700; font-size: clamp(1rem, 2vw, 1.5rem);">🌹</span>
+                    <span style="color: #ff3366; font-weight: 700; font-size: clamp(1rem, 2vw, 1.5rem);">🌹</span>
+                </div>
+                <p style="font-size: clamp(0.8rem, 1.5vw, 1rem); color: #888; margin-top: 10px; font-weight: 400;">watch till the end. then continue</p>
+                <button class="btn" onclick="showPage('page2')"><strong>🌹 continue</strong></button>
+            </div>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page" id="page2">
+            <div class="center-text">
+                <h2 class="big-title">හේයි....❤️</h2>
+                <div class="spacer"></div>
+                <p style="font-size: clamp(1rem, 2.2vw, 1.3rem); color: #555; max-width: 90%; margin: 0 auto; font-weight: 400;">
+                    මට ඔයාට කියන්න පුංචි දෙයක් තියෙනවා.... මේක අන්තිම වෙනකන් බලන්න promise වෙන්න🥺
+                </p>
+                <div class="spacer-md"></div>
+                <button class="btn" onclick="showPage('page3')"><strong>i promise 💕</strong></button>
+            </div>
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page" id="page3">
+            <div class="center-text">
+                <h2 style="font-size: clamp(1.3rem, 3vw, 2rem); color: #ff3366; font-weight: 700;">before we continue</h2>
+                <p style="font-size: clamp(1rem, 2.5vw, 1.5rem); margin: 20px 0; color: #333; font-weight: 400;">
+                    මුලින්ම මේ TEDDY ට hug එකක් දෙන්න. 🧸
+                </p>
+                <button class="btn" onclick="showPage('page4')"><strong>Give a Hug 😇</strong></button>
+            </div>
+        </div>
+
+        <!-- PAGE 4: PROGRESS BAR -->
+        <div class="page" id="page4">
+            <div class="center-text">
+                <p style="font-size: clamp(1rem, 2.2vw, 1.3rem); color: #555; max-width: 90%; margin: 0 auto; font-weight: 400;">
+                    ඔයා මාව කොච්චර විශ්වාස කරනවද කියලා මේකෙන් පෙන්වන්න.
+                </p>
+                <p style="font-size: clamp(0.8rem, 1.5vw, 1rem); color: #ff3366; margin-top: 5px;">
+                    ⭐ 50% ට වඩා වැඩි කරන්න
+                </p>
+                <div class="spacer-md"></div>
+                
+                <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                        <div class="draggable-heart" id="draggableHeart">❤️</div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                    <p style="color: #888; margin: 5px 0; font-size: clamp(0.7rem, 1.5vw, 0.9rem); font-weight: 400;">
+                        💕 හදවත අල්ලාගෙන තීරුව ඇතුළේ හරහට අදින්න
+                    </p>
+                </div>
+                
+                <div class="spacer-md"></div>
+                <button class="btn btn-continue" id="continueBtn" onclick="showPageWithProgress('page5')" style="display: none;"><strong>continue ➡️</strong></button>
+            </div>
+        </div>
+
+        <!-- PAGE 5: SLIDESHOW -->
+        <div class="page" id="page5">
+            <div class="slideshow-container" id="slideshowContainer">
+                <img class="slide active" src="1.jpg" alt="Photo 1">
+                <img class="slide" src="2.jpg" alt="Photo 2">
+                <img class="slide" src="3.jpg" alt="Photo 3">
+                <img class="slide" src="4.jpg" alt="Photo 4">
+                
+                <div class="slide-counter" id="slideCounter"><strong>1 / 4</strong></div>
+                
+                <div class="slide-dots" id="slideDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="showPage('page6')"><strong>Read my letter 📖</strong></button>
+        </div>
+
+        <!-- PAGE 6: LETTER -->
+        <div class="page" id="page6">
+            <div class="letter-box">
+                <div style="font-size: clamp(2rem, 5vw, 3rem); text-align: center; font-weight: 700;">💕</div>
+                <div id="typewriterText" class="typewriter" style="font-size: clamp(0.85rem, 1.8vw, 1.05rem); padding: 5px 0;">
+                    💕 මම ඔයාට ගොඩක් ආදරෙයි. ඔයාව නැතුව එක මොහොතක්වත් මට ඉන්න බෑ සචී මගෙ අම්මගෙන් පස්සෙ මට ආදරේ වැඩිපුරම ලැබුනෙ ඔයාගෙන්. මම ඔයාට කොච්චර ආදරේද කියන්නයි මම මේක හැදුවේ. මම ඔයාට ගොඩක් ආදරෙයි ලස්සන ලමයෝ 💕
+                </div>
+            </div>
+            <button class="btn" onclick="showPage('page7')"><strong>continue ➡️</strong></button>
+        </div>
+
+        <!-- PAGE 7: WILL YOU BE MINE -->
+        <div class="page" id="page7">
+            <div class="big-heart">❤️</div>
+            <h1 class="big-title" style="font-size: clamp(2.5rem, 7vw, 4.5rem);">Will You Be Mine</h1>
+            <div class="row-buttons">
+                <button class="btn" onclick="showPage('page8')"><strong>Yes 💖</strong></button>
+                <button class="btn btn-maybe" onclick="showPage('page9')"><strong>Maybe 🤔</strong></button>
+            </div>
+        </div>
+
+        <!-- PAGE 8: YES -->
+        <div class="page" id="page8">
+            <div class="center-text">
+                <h2 style="font-size: clamp(1.3rem, 3.5vw, 2.2rem); color: #ff3366; font-weight: 700; max-width: 90%; margin: 0 auto;">
+                    ස්තූතියි ඔයාට මට මේ සතුට කියලා නිම කරන්න බෑ
+                </h2>
+                <div class="spacer-md"></div>
+                <!-- WhatsApp button with auto-reply -->
+                <button class="btn" onclick="sendWhatsAppWithReply()"><strong>📩 Send Message with Reply</strong></button>
+                <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">* ඔබගේ ප්‍රතිශතයත් සමඟ Auto Reply එක යයි</p>
+            </div>
+        </div>
+
+        <!-- PAGE 9: MAYBE -->
+        <div class="page" id="page9">
+            <div class="center-text">
+                <p style="font-size: clamp(1.2rem, 3vw, 1.8rem); color: #555; font-weight: 400; max-width: 90%; margin: 0 auto;">
+                    කමක් නෑ ඔයා වෙලාව අරන් හොදට හිතලා බලන්න..
+                </p>
+                <div class="spacer-md"></div>
+                <button class="btn" onclick="showPage('page1')"><strong>🔙 ආපසු</strong></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================
+        // 1. PAGE SWITCHING
+        // ============================================
+        let savedProgress = 0;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                if (pageId === 'page6') initTypewriter();
+                if (pageId === 'page7') createHearts(50);
+                if (pageId === 'page5') startSlideshow();
+                document.querySelector('.container').scrollTop = 0;
+            }
+        }
+
+        function showPageWithProgress(pageId) {
+            // Save the progress before showing next page
+            const progress = parseInt(document.getElementById('progressText').textContent);
+            savedProgress = progress;
+            showPage(pageId);
+        }
+
+        // ============================================
+        // 2. HEART RAIN
+        // ============================================
+        function createHearts(count = 30) {
+            const container = document.getElementById('heartRain');
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('i');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 20 + 14) + 'px';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.opacity = Math.random() * 0.6 + 0.2;
+                container.appendChild(heart);
+            }
+        }
+        createHearts(25);
+
+        // ============================================
+        // 3. PROGRESS BAR - START FROM 50%
+        // ============================================
+        let isDragging = false;
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const continueBtn = document.getElementById('continueBtn');
+        const heartDrag = document.getElementById('draggableHeart');
+        const progressContainer = document.getElementById('progressContainer');
+
+        // Set initial progress to 50%
+        let currentProgress = 50;
+        progressFill.style.width = '50%';
+        progressText.textContent = '50%';
+        heartDrag.style.left = '50%';
+
+        function updateProgress(clientX) {
+            const rect = progressContainer.getBoundingClientRect();
+            let percent = (clientX - rect.left) / rect.width;
+            percent = Math.min(1, Math.max(0, percent));
+            let progress = Math.round(percent * 100);
+            
+            // Start from 50% - minimum is 50%
+            if (progress < 50) progress = 50;
+            
+            progressFill.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+            heartDrag.style.left = progress + '%';
+            currentProgress = progress;
+            
+            // Show continue button when progress >= 50% (always visible now since min is 50%)
+            continueBtn.style.display = 'inline-block';
+            progressFill.style.background = 'linear-gradient(90deg, #ff3366, #ff6699)';
+            
+            return progress;
+        }
+
+        // Mouse events
+        heartDrag.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            heartDrag.style.cursor = 'grabbing';
+            updateProgress(e.clientX);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) updateProgress(e.clientX);
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                heartDrag.style.cursor = 'grab';
+            }
+        });
+
+        // Touch events (Mobile)
+        heartDrag.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            const touch = e.touches[0];
+            updateProgress(touch.clientX);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                const touch = e.touches[0];
+                updateProgress(touch.clientX);
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            updateProgress(e.clientX);
+        });
+
+        // ============================================
+        // 4. SLIDESHOW
+        // ============================================
+        let slideIndex = 0;
+        let slideInterval = null;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const counter = document.getElementById('slideCounter');
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active', 'fade-out'));
+            dots.forEach(d => d.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            counter.innerHTML = `<strong>${index + 1} / ${slides.length}</strong>`;
+            slideIndex = index;
+        }
+
+        function nextSlide() {
+            const next = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('fade-out');
+            setTimeout(() => {
+                slides[slideIndex].classList.remove('fade-out');
+            }, 300);
+            showSlide(next);
+        }
+
+        function startSlideshow() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+            showSlide(0);
+            slideInterval = setInterval(nextSlide, 3000);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 3000);
+            });
+        });
+
+        // ============================================
+        // 5. TYPEWRITER
+        // ============================================
+        let typewriterInterval = null;
+        let typewriterIndex = 0;
+        const typewriterFullText = `මැට්ටො මගෙ සංකුට්ටො ❤️🥺 ඔයා මගේ ජීවිතේට ආපු දවසේ ඉඳන් හැමදේම ලස්සන වෙලා. ඔයා එක්ක කතා කරන හැම මොහොතක්ම මට හරිම වටිනවා. මගේ සතුට, මගේ හිනාව, මගේ හිතේ ආදරේ—මේ හැමදේකටම හේතුව ඔයා. 🥹❤️
+
+මැට්ටො, මං හැමදාම ඔයාගෙ අත අල්ලගෙන, ඔයාට ආදරේ කරගෙන, ඔයා එක්කම ඉන්න ආසයි. මගෙ සංකුට්ටො, ඔයා මට ලෝකෙම වගේ. 🫶🏻💗 මං ඔයාට ගොඩක් ගොඩක් ආදරෙයි. 😚❤️`;
+
+        function initTypewriter() {
+            const el = document.getElementById('typewriterText');
+            if (!el) return;
+            if (typewriterInterval) {
+                clearInterval(typewriterInterval);
+                typewriterInterval = null;
+            }
+            el.textContent = '';
+            typewriterIndex = 0;
+            typewriterInterval = setInterval(() => {
+                if (typewriterIndex < typewriterFullText.length) {
+                    el.textContent += typewriterFullText.charAt(typewriterIndex);
+                    typewriterIndex++;
+                    if (typewriterIndex === typewriterFullText.length) {
+                        clearInterval(typewriterInterval);
+                        typewriterInterval = null;
+                        el.style.borderRight = 'none';
+                    }
+                } else {
+                    clearInterval(typewriterInterval);
+                    typewriterInterval = null;
+                    el.style.borderRight = 'none';
+                }
+            }, 40);
+        }
+
+        // ============================================
+        // 6. WHATSAPP WITH AUTO-REPLY
+        // ============================================
+        function sendWhatsAppWithReply() {
+            // Get the saved progress percentage
+            const progress = savedProgress || currentProgress || 50;
+            
+            // Phone numbers - Updated to +94724279879
+            const targetNumber = '94724279879';  // Number to send the auto-reply to
+            const userNumber = '+94760276945';  // Your number for the initial message
+            
+            // Create message with the progress percentage
+            const message = `ආයුබෝවන්... මම ඔබගේ proposal එක පිළිගත්තා 💕\n\nමගේ විශ්වාසයේ ප්‍රතිශතය: ${progress}%`;
+            
+            // Open WhatsApp with the message - send to the target number (+94724279879)
+            window.open(`https://wa.me/${targetNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // Also open a second WhatsApp chat to the user's number with confirmation
+            setTimeout(() => {
+                const confirmMessage = `✅ ඔබගේ ප්‍රතිශතය (${progress}%) සාර්ථකව +94724279879 අංකයට යවන ලදි.`;
+                window.open(`https://wa.me/${userNumber}?text=${encodeURIComponent(confirmMessage)}`, '_blank');
+            }, 1000);
+        }
+
+        // ============================================
+        // 7. ALTERNATIVE: Direct Auto-Reply Simulation
+        // ============================================
+        function setupAutoReply() {
+            const lastReply = localStorage.getItem('lastProposalReply');
+            const replyTime = localStorage.getItem('lastReplyTime');
+            
+            if (lastReply && replyTime) {
+                const timeDiff = Date.now() - parseInt(replyTime);
+                if (timeDiff < 3600000) {
+                    console.log('Auto-reply already sent recently');
+                    return;
+                }
+            }
+            
+            console.log('Auto-reply would be sent to +94724279879');
+            console.log(`Progress: ${currentProgress}%`);
+        }
+
+        // Call this when the user reaches the final page
+        const originalShowPage = showPage;
+        showPage = function(pageId) {
+            originalShowPage(pageId);
+            if (pageId === 'page8') {
+                setupAutoReply();
+            }
+        };
+
+        console.log('❤️ GEN-Z Proposal - Updated with White & Rose theme!');
+        console.log('📱 Phone number updated to: +94724279879');
+    </script>
+
+</body>
+</html>
